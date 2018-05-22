@@ -1,0 +1,5 @@
+node_modules/*
+wm-config.json
+config/wm-config.json
+report.txt
+logs/report.txt
