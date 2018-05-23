@@ -8,6 +8,6 @@ module.exports = {
   history:
     'https://raw.githubusercontent.com/webliumteam/blocks/history/historia_vitae_magistra.json',
   localhost: 'http://localhost:9999/',
-  report: `${appRoot.path}/logs/report.txt`,
-  wmConfig: `${appRoot.path}/config/wm-config.json`
+  report: `${appRoot.path}/logs/report.txt`.replace('/scripts/', '/'),
+  wmConfig: `${appRoot.path}/config/wm-config.json`.replace('/scripts/', '/')
 }

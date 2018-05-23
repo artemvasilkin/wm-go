@@ -5,7 +5,6 @@ const program = require('commander')
 const { login } = require('../src/utils/login')
 const { pr } = require('../src/utils/pr')
 const { save } = require('../src/utils/save')
-const { open } = require('../src/utils/open')
 
 program
   .option('-l, --login [server]', 'login', '')
@@ -16,10 +15,6 @@ program
 
 if (program.login) {
   login(program.login)
-}
-
-if (program.open) {
-  open(program.open)
 }
 
 if (program.pr) {

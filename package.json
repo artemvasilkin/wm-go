@@ -51,7 +51,8 @@
     "wm-report": "./scripts/wm-report.js",
     "wm-config": "./scripts/wm-config.js",
     "wm-history": "./scripts/wm-history.js",
-    "wm-kill": "./scripts/wm-kill.js"
+    "wm-kill": "./scripts/wm-kill.js",
+    "wm-open": "./scripts/wm-open.js"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
