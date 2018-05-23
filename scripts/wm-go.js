@@ -3,7 +3,6 @@
 const program = require('commander')
 
 const { figlet } = require('../src/utils/figlet')
-const { show } = require('../src/utils/show')
 const { getBranches } = require('../src/utils/getBranches')
 const { open } = require('../src/utils/open')
 
