@@ -5,6 +5,7 @@ const program = require('commander')
 const { figlet } = require('../src/utils/figlet')
 const { show } = require('../src/utils/show')
 const { getBranches } = require('../src/utils/getBranches')
+const { open } = require('../src/utils/open')
 
 const { goRound: go } = require('../src/goRound')
 const { kill } = require('../src/kill')
@@ -21,13 +22,13 @@ program
   .parse(process.argv)
 
 const branches = getBranches(pattern)
+const branchesLength = branches.length
 
-figlet(`${branches.length} branches found`)
+figlet(`${branchesLength} branches found`)
 
 go(branches, (branch, index) => {
-  figlet(`${index + 1} of ${branches.length}`)
-  show(`git checkout ${branch}`)
-  show(`git pull origin ${branch}`)
+  figlet(`${index + 1} of ${branchesLength}`)
+  open(branch)
 
   if (program.kill && program.kill.length > 0) {
     kill(program.kill, 'y')

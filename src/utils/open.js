@@ -9,7 +9,7 @@ const getBranchFromBlockName = blockName => {
   return `${blockType}/${groups[2]}/${groups[3]}/dev`
 }
 
-const superCheckout = query => {
+const open = query => {
   if (query) {
     let branch = ''
 
@@ -25,5 +25,5 @@ const superCheckout = query => {
 }
 
 module.exports = {
-  superCheckout: query => superCheckout(query)
+  open: query => open(query)
 }

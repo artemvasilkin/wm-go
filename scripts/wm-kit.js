@@ -5,7 +5,7 @@ const program = require('commander')
 const { login } = require('../src/utils/login')
 const { pr } = require('../src/utils/pr')
 const { save } = require('../src/utils/save')
-const { superCheckout } = require('../src/utils/superCheckout')
+const { open } = require('../src/utils/open')
 
 program
   .option('-l, --login [server]', 'login', '')
@@ -19,7 +19,7 @@ if (program.login) {
 }
 
 if (program.open) {
-  superCheckout(program.open)
+  open(program.open)
 }
 
 if (program.pr) {
