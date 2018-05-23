@@ -4,10 +4,12 @@ const report = require('../../config/globals')
 
 const { alert, gratz, error } = require('../utils/out')
 
+const reportFile = report.replace('/scripts/', '/')
+
 const getReport = () => {
   try {
-    const result = fs.existsSync(`${report}`)
-      ? alert(fs.readFileSync(`${report}`).toString())
+    const result = fs.existsSync(`${reportFile}`)
+      ? alert(fs.readFileSync(`${reportFile}`).toString())
       : alert('report is empty')
 
     return result
@@ -20,8 +22,8 @@ const getReport = () => {
 
 const clearReport = () => {
   try {
-    if (fs.existsSync(`${report}`)) {
-      fs.unlinkSync(`${report}`)
+    if (fs.existsSync(`${reportFile}`)) {
+      fs.unlinkSync(`${reportFile}`)
       gratz('report has been cleared')
     } else {
       error('no report to clear')

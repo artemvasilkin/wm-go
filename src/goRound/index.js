@@ -2,6 +2,8 @@ const fs = require('fs')
 
 const report = require('../../config/globals')
 
+const reportFile = report.replace('/scripts/', '/')
+
 const goRound = (data, func) => {
   data.forEach((item, index) => {
     try {
@@ -9,7 +11,7 @@ const goRound = (data, func) => {
     } catch (error) {
       const dateTime = new Date()
       const content = `${dateTime}\n${item}\n${error}\n\n\n\n`
-      fs.appendFileSync(`${report}`, content)
+      fs.appendFileSync(`${reportFile}`, content)
     }
   })
 }
