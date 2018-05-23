@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const report = require('../../config/globals')
+const { report } = require('../../config/globals')
 
 const { alert, gratz, error } = require('../utils/out')
 

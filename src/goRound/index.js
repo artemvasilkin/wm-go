@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const report = require('../../config/globals')
+const { report } = require('../../config/globals')
 
 const reportFile = report.replace('/scripts/', '/')
 
