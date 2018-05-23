@@ -1,6 +1,6 @@
 {
   "name": "wm-go",
-  "version": "6.1.4-0",
+  "version": "6.1.5",
   "description": "Weblium API command line client helper",
   "keywords": [
     "cli",
