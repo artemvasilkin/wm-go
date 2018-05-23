@@ -45,7 +45,6 @@
   "bin": {
     "wm-go": "./scripts/wm-go.js",
     "wm-init": "./scripts/wm-init.js",
-    "wm-kit": "./scripts/wm-kit.js",
     "wm-republish": "./scripts/wm-republish.js",
     "wm-review": "./scripts/wm-review.js",
     "wm-report": "./scripts/wm-report.js",
@@ -53,7 +52,9 @@
     "wm-history": "./scripts/wm-history.js",
     "wm-kill": "./scripts/wm-kill.js",
     "wm-open": "./scripts/wm-open.js",
-    "wm-save": "./scripts/wm-save.js"
+    "wm-save": "./scripts/wm-save.js",
+    "wm-pr": "./scripts/wm-pr.js",
+    "wm-login": "./scripts/wm-login.js"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

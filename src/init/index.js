@@ -10,8 +10,8 @@ const { getDomain } = require('../utils/getDomain')
 const { getBlock } = require('../utils/getBlock')
 const { save } = require('../save')
 const { npmInstall } = require('../utils/npmInstall')
-const { login } = require('../utils/login')
-const { pr } = require('../utils/pr')
+const { login } = require('../login')
+const { pr } = require('../pr')
 
 const initFlow = (server, domain) => {
   try {

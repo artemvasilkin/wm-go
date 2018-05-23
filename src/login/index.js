@@ -1,16 +1,22 @@
 const { show } = require('../utils/show')
 const { getDomain } = require('../utils/getDomain')
 const { getConfigs } = require('../../src/config')
+const { error } = require('../utils/out')
 
-module.exports = {
-  login: server => {
+const login = server => {
+  if (server) {
     const configs = getConfigs()
-    const domain = getDomain(server)
 
     show(
       `wm-cli login -u ${configs.wmUserEmail} -p ${
         configs.wmUserPassword
-      } -h https://weblium.${domain}`
+      } -h https://weblium.${getDomain(server)}`
     )
+  } else {
+    error('please, specify the server')
   }
+}
+
+module.exports = {
+  login: server => login(server)
 }

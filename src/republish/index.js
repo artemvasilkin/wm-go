@@ -6,10 +6,10 @@ const { getBlock } = require('../utils/getBlock')
 const { getDomain } = require('../utils/getDomain')
 const { error } = require('../utils/out')
 const { npmInstall } = require('../utils/npmInstall')
-const { login } = require('../utils/login')
+const { login } = require('../login')
 const { show } = require('../utils/show')
 const { save } = require('../save')
-const { pr } = require('../utils/pr')
+const { pr } = require('../pr')
 
 const republishFlow = (domain, commit) => {
   try {
