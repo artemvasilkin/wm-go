@@ -6,7 +6,7 @@ const { run } = require('../utils/run')
 const { history: historyFile } = require('../../config/globals')
 
 const { show } = require('../utils/show')
-const { save } = require('../utils/save')
+const { save } = require('../save')
 
 const getHistory = () => {
   try {

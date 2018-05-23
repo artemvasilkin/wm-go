@@ -8,7 +8,7 @@ const { error } = require('../utils/out')
 const { npmInstall } = require('../utils/npmInstall')
 const { login } = require('../utils/login')
 const { show } = require('../utils/show')
-const { save } = require('../utils/save')
+const { save } = require('../save')
 const { pr } = require('../utils/pr')
 
 const republishFlow = (domain, commit) => {

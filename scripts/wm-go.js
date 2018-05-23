@@ -4,12 +4,12 @@ const program = require('commander')
 
 const { figlet } = require('../src/utils/figlet')
 const { getBranches } = require('../src/utils/getBranches')
-const { open } = require('../src/utils/open')
 
 const { goRound: go } = require('../src/goRound')
 const { kill } = require('../src/kill')
 const { init } = require('../src/init')
 const { republish } = require('../src/republish')
+const { open } = require('../src/open')
 
 const [, , ...args] = process.argv
 const pattern = args.length ? args[0] : false
