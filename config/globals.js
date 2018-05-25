@@ -17,6 +17,34 @@ const devFile = `${baseFile}${devDomain}`
 const stageFile = `${baseFile}${stageDomain}`
 const prodFile = `${baseFile}${prodDomain}`
 
+const categories = [
+  'About',
+  'Awards',
+  'Blog',
+  'Careers',
+  'Contacts',
+  'Cover',
+  'CTA',
+  'Events',
+  'FAQ',
+  'Footer',
+  'Gallery',
+  'Header',
+  'Numbers',
+  'Partners',
+  'Pricing',
+  'Process',
+  'Projects',
+  'Quote',
+  'Services',
+  'Schedule',
+  'Follow-us',
+  'Team',
+  'Testimonials',
+  'Text',
+  'Why'
+]
+
 const history =
   'https://raw.githubusercontent.com/webliumteam/blocks/history/historia_vitae_magistra.json'
 
@@ -38,6 +66,7 @@ module.exports = {
   devFile: devFile,
   stageFile: stageFile,
   prodFile: prodFile,
+  categories: categories,
   history: history,
   localhost: localhost,
   report: report,
