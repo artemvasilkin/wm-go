@@ -3,7 +3,7 @@ const getBranchFromBlockName = blockName => {
   const groups = validator.exec(blockName)
   const blockType = groups[1].match('wireframe') ? 'w' : 'd'
 
-  return `${blockType}/${groups[2]}/${groups[3]}/dev`
+  return `${blockType}/${groups[2]}/${groups[3].replace('-', '_')}/dev`
 }
 
 module.exports = {

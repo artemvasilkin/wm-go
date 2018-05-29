@@ -1,14 +1,23 @@
 const { error } = require('../utils/out')
 const { show } = require('../utils/show')
 const { getBranchFromBlockName } = require('../utils/getBranchFromBlockName')
+const { getBranchFromBlockID } = require('../utils/getBranchFromBlockID')
 
 const open = query => {
   if (query) {
     let branch = ''
 
-    query.split('/').length < 4
-      ? (branch = getBranchFromBlockName(query))
-      : (branch = query)
+    if (query.match(/(blockId)-([a-z0-9]{24})/)) {
+      branch = getBranchFromBlockID(query)
+    } else if (
+      query.match(
+        /^(wireframe|design)-(series-\d+|[a-zA-Z0-9_]*)-([a-zA-Z0-9_-]*)$/
+      )
+    ) {
+      branch = getBranchFromBlockName(query)
+    } else {
+      branch = query
+    }
 
     show(`git checkout ${branch}`)
     show(`git pull origin ${branch}`)
