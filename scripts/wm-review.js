@@ -9,7 +9,10 @@ const params = args.length ? args : false
 
 let branch = false
 
-branch = typeof params[0] === 'string' ? params[0] : params[1]
+if (params.length > 1) {
+  branch =
+    params[0] !== '-e' && params[0] !== '--editor' ? params[0] : params[1]
+}
 
 program.option('-e, --editor', 'editor mode').parse(process.argv)
 
