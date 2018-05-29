@@ -9,7 +9,6 @@ const { npmInstall } = require('../utils/npmInstall')
 const reviewFlow = (serverMode, branch) => {
   try {
     alert(`running in ${serverMode}`)
-    error(branch)
     branch ? open(branch) : show(`git pull origin ${getCurrentBranch()}`)
     npmInstall()
     alert(`server is loading, please check ${localhost}`)

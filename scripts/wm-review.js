@@ -13,6 +13,4 @@ branch = typeof params[0] === 'string' ? params[0] : params[1]
 
 program.option('-e, --editor', 'editor mode').parse(process.argv)
 
-console.log(branch)
-
 review(program.editor, branch)
