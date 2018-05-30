@@ -6,10 +6,10 @@ const { show } = require('../utils/show')
 const { getCurrentBranch } = require('../utils/getCurrentBranch')
 const { npmInstall } = require('../utils/npmInstall')
 
-const reviewFlow = (serverMode, branch) => {
+async function reviewFlow (serverMode, branch) {
   try {
     alert(`running in ${serverMode}`)
-    branch ? open(branch) : show(`git pull origin ${getCurrentBranch()}`)
+    branch ? await open(branch) : show(`git pull origin ${getCurrentBranch()}`)
     npmInstall()
     alert(`server is loading, please check ${localhost}`)
     show(`WM_SANDBOX_MODE=${serverMode} wm-sandbox`)

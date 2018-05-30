@@ -39,6 +39,7 @@
     "commander": "^2.15.1",
     "console.table": "^0.10.0",
     "figlet": "^1.2.0",
+    "inquirer": "^5.2.0",
     "np": "^2.20.1",
     "prompt-sync": "^4.1.6"
   },
