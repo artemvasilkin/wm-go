@@ -5,13 +5,13 @@ const { report } = require('../../config/globals')
 const reportFile = report.replace('/scripts/', '/')
 
 const goRound = (data, func) => {
-  data.forEach((item, index) => {
+  data.forEach(async (item, index) => {
     try {
-      func(item, index)
+      await func(item, index)
     } catch (error) {
-      const dateTime = new Date()
-      const content = `${dateTime}\n${item}\n${error}\n\n\n\n`
-      fs.appendFileSync(`${reportFile}`, content)
+      const dateTime = await new Date()
+      const content = await `${dateTime}\n${item}\n${error}\n\n\n\n`
+      await fs.appendFileSync(`${reportFile}`, content)
     }
   })
 }
