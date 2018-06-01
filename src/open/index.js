@@ -11,7 +11,7 @@ const openFlow = branch => {
   show(`git pull origin ${branch}`)
 }
 
-async function open (query) {
+const open = query => {
   if (query) {
     const validatorId = /(blockId)-([a-z0-9]{24})/
     const validatorName = /^(wireframe|design)-(series-\d+|[a-zA-Z0-9_]*)-([a-zA-Z0-9_-]*)$/
@@ -22,26 +22,45 @@ async function open (query) {
     } else if (query.match(validatorName)) {
       openFlow(getBranchFromBlockName(query))
     } else if (query.match(validatorShortBranch)) {
-      let promise = new Promise((resolve, reject) => {
-        const branches = getBranches().filter(
-          item => item.match(query) && !item.match('/prod')
-        )
+      // let promise = new Promise((resolve, reject) => {
+      //   const branches = getBranches().filter(
+      //     item => item.match(query) && !item.match('/prod')
+      //   )
 
-        if (branches.length > 1) {
-          prompt({
-            type: 'list',
-            name: 'branch',
-            message: 'Choose the branch',
-            choices: branches
-          }).then(answer => {
-            resolve(answer.branch)
-          })
-        }
-      })
+      //   if (branches.length > 1) {
+      //     prompt({
+      //       type: 'list',
+      //       name: 'branch',
+      //       message: 'Choose the branch',
+      //       choices: branches
+      //     }).then(answer => {
+      //       resolve(answer.branch)
+      //     })
+      //   } else {
+      //     resolve(branches)
+      //   }
+      // })
 
-      let branch = await promise
+      // let branch = await promise
 
-      openFlow(branch)
+      // openFlow(branch)
+
+      const branches = getBranches().filter(
+        item => item.match(query) && !item.match('/prod')
+      )
+
+      if (branches.length > 1) {
+        prompt({
+          type: 'list',
+          name: 'branch',
+          message: 'Choose the branch',
+          choices: branches
+        }).then(answer => {
+          openFlow(answer.branch)
+        })
+      } else {
+        openFlow(branches)
+      }
     } else {
       openFlow(query)
     }
@@ -51,5 +70,7 @@ async function open (query) {
 }
 
 module.exports = {
-  open: query => open(query)
+  open: async query => {
+    await open(query)
+  }
 }
