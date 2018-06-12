@@ -42,7 +42,8 @@ const categories = [
   'Team',
   'Testimonials',
   'Text',
-  'Why'
+  'Why',
+  'Table'
 ]
 
 const history =
