@@ -17,7 +17,7 @@ const getHistory = () => {
   } catch (message) {
     error(message)
 
-    return error
+    return message
   }
 }
 
@@ -57,8 +57,6 @@ const showHistory = () => {
         if (publishDate[2].match(now.getDate())) {
           today++
         }
-      } else {
-        error('error')
       }
     })
 
@@ -70,7 +68,7 @@ const showHistory = () => {
   } catch (message) {
     error(message)
 
-    return error
+    return message
   }
 }
 
@@ -138,5 +136,5 @@ const updateHistory = (domain, block, date) => {
 module.exports = {
   getHistory: () => getHistory(),
   showHistory: () => showHistory(),
-  updateHistory: () => updateHistory()
+  updateHistory: (domain, block, date) => updateHistory(domain, block, date)
 }
