@@ -20,7 +20,7 @@ program
   .option('-k, --kill [server]', 'kill', '')
   .parse(process.argv)
 
-const branches = getBranches(pattern)
+const branches = getBranches(pattern).filter(branch => branch.match('/dev'))
 const branchesLength = branches.length
 
 figlet(`${branchesLength} branches found`)
