@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+console.time('wm-go')
+
 const program = require('commander')
 
 const { figlet } = require('../src/utils/figlet')
@@ -41,3 +43,5 @@ go(branches, (branch, index) => {
     republish(program.republish)
   }
 })
+
+console.timeEnd('wm-go')

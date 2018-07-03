@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+console.time('wm-review')
+
 const program = require('commander')
 
 const { review } = require('../src/review')
@@ -17,3 +19,5 @@ if (params.length > 1) {
 program.option('-e, --editor', 'editor mode').parse(process.argv)
 
 review(program.editor, branch)
+
+console.timeEnd('wm-review')

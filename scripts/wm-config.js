@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+console.time('wm-config')
+
 const program = require('commander')
 
 const { editConfigs, showConfigs } = require('../src/config')
@@ -11,3 +13,5 @@ if (program.edit) {
 }
 
 showConfigs()
+
+console.timeEnd('wm-config')
