@@ -41,7 +41,8 @@
     "figlet": "^1.2.0",
     "inquirer": "^5.2.0",
     "np": "^2.20.1",
-    "prompt-sync": "^4.1.6"
+    "prompt-sync": "^4.1.6",
+    "replace-in-file": "^3.4.0"
   },
   "bin": {
     "wm-go": "./scripts/wm-go.js",
