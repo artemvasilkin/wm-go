@@ -2,7 +2,9 @@
 
 **Essential commands**
 
+* [#](#wm-open) `wm-open`
 * [#](#wm-review) `wm-review`
+* [#](#wm-save) `wm-save`
 * [#](#wm-init) `wm-init`
 * [#](#wm-republish) `wm-republish`
 * [#](#wm-kill) `wm-kill`
@@ -16,9 +18,13 @@
 
 * [#](#wm-go-1) `wm-go`
 * [#](#wm-report) `wm-report`
-* [#](#wm-kit) `wm-kit`
+* [#](#wm-pr) `wm-pr`
 
 # Essential commands
+
+## wm-open
+
+Open block (checkout and pull git branch) with `wm-open branch|block-name|blockId`.
 
 ## wm-review
 
@@ -41,6 +47,10 @@ $ wm-review --editor
 ```shell
 $ wm-review -e
 ```
+
+## wm-save
+
+Saves block (add, commit and push git branch) with `wm-save "commit message"`. If the current branch has no upstream branch `wm-save` will create it automatically.
 
 ## wm-init
 
@@ -132,6 +142,10 @@ Kll (remove and purge) block (current branch) on dev, stage or prod server.
 
 `wm-kill all` - kill block on both staging and production servers
 
+## wm-pr
+
+Creates a pull request on prod branch.
+
 # Special commands
 
 ## wm-config
@@ -216,14 +230,3 @@ All errors caught during `wm-go` command (see [wm-go](#wm-go-1)) fall into repor
 `wm-report` - read the report file
 
 `wm-report --clear` or `wm-report -c` - clear the report file
-
-## wm-kit
-
-Kit of small helpful commands.
-
-**What it can do (examples):**
-
-* Open block (checkout and pull git branch) with `wm-kit --open branch-name`, the shorter flag `wm-kit -o` also works.
-* Save block (add, commit and push git branch) with `wm-kit --save "commit message"`, the shorter flag `wm-kit -s` also works. If the current branch has no upstream branch `wm-kit` will create it automatically.
-* Login on dev, stage or prod server with `wm-kit --login dev`, `wm-kit --login stage` or `wm-kit --login prod`, the shorter flag `wm-kit -l` also works, as well as shorter names of servers (`io`, `co` or `com`)
-* Create a pull request on prod branch with `wm-kit --pr`, the shorter flag `wm-kit -p` also works
