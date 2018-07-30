@@ -12,6 +12,17 @@ class Wireframe extends React.Component {
   getOptionValue = (path, defaultValue = false) =>
     _.getOr(defaultValue, ['options', path], this.props.$block)
 
+  setStylesForBody = (reset = false) => {
+    const { opened } = this.state
+    const nodes = [document.getElementsByTagName('html')[0]]
+
+    if (!reset && opened) {
+      nodes.forEach(setStyleProperties([['overflow-y', 'hidden']]))
+    } else {
+      nodes.forEach(resetStyleProperties(['overflow-y']))
+    }
+  }
+
   collectionItem = ({ index, children, className }) => {
     const {
       components: { Image, Text },
