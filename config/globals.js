@@ -45,7 +45,8 @@ const categories = [
   'Why',
   'Table',
   'Menu',
-  'History'
+  'History',
+  'Extra'
 ]
 
 const history =
