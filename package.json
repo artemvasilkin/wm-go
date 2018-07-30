@@ -56,7 +56,8 @@
     "wm-open": "./scripts/wm-open.js",
     "wm-save": "./scripts/wm-save.js",
     "wm-pr": "./scripts/wm-pr.js",
-    "wm-login": "./scripts/wm-login.js"
+    "wm-login": "./scripts/wm-login.js",
+    "wm-replace": "./scripts/wm-replace.js"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

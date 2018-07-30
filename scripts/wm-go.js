@@ -27,9 +27,7 @@ program
   .parse(process.argv)
 
 const branches = getBranches(pattern).filter(branch =>
-  branch.match(
-    /^(w)(\/)(series-\d+|zapdos|lucario)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/
-  )
+  branch.match(/^(w)(\/)(series-\d+|zapdos)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/)
 )
 const branchesLength = branches.length
 
@@ -47,53 +45,53 @@ const replacment = [
   "nodes.forEach(resetStyleProperties(['overflow-y']))"
 ]
 
-// figlet(`${branchesLength} branches found`)
+figlet(`${branchesLength} branches found`)
 
-// go(branches, (branch, index) => {
-// figlet(`${index + 1} of ${branchesLength}`)
-// open(branch)
+go(branches, (branch, index) => {
+  figlet(`${index + 1} of ${branchesLength}`)
+  open(branch)
 
-if (fs.existsSync(component)) {
-  let shouldRepublish = false
+  if (fs.existsSync(component)) {
+    let shouldRepublish = false
 
-  gratz('exists')
+    gratz('exists')
 
-  for (var i = 0; i < replacings.length; i++) {
-    gratz('for loop started')
+    for (var i = 0; i < replacings.length; i++) {
+      gratz('for loop started')
 
-    while (replacings[i].test(fs.readFileSync(component).toString())) {
-      gratz('while loop started')
+      while (replacings[i].test(fs.readFileSync(component).toString())) {
+        gratz('while loop started')
 
-      fs.writeFileSync(
-        component,
-        fs
-          .readFileSync(component)
-          .toString()
-          .replace(replacings[i], replacment[i])
-      )
+        fs.writeFileSync(
+          component,
+          fs
+            .readFileSync(component)
+            .toString()
+            .replace(replacings[i], replacment[i])
+        )
 
-      shouldRepublish = true
+        shouldRepublish = true
+      }
     }
+
+    if (shouldRepublish) {
+      save('fix sticky header')
+
+      if (program.kill && program.kill.length > 0) {
+        kill(program.kill, 'y')
+      }
+
+      if (program.init && program.init.length > 0) {
+        init(program.init)
+      }
+
+      if (program.republish && program.republish.length > 0) {
+        republish(program.republish)
+      }
+    }
+  } else {
+    error('no component')
   }
-
-  if (shouldRepublish) {
-    save('fix sticky header')
-
-    if (program.kill && program.kill.length > 0) {
-      kill(program.kill, 'y')
-    }
-
-    if (program.init && program.init.length > 0) {
-      init(program.init)
-    }
-
-    if (program.republish && program.republish.length > 0) {
-      republish(program.republish)
-    }
-  }
-} else {
-  error('no component')
-}
-// })
+})
 
 console.timeEnd('wm-go')
