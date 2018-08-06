@@ -28,7 +28,7 @@ const pattern = args.length ? args[0] : false
 program
   .option('-f, --find', 'find', '')
   .option('-k, --kill [server]', 'kill', '')
-  .option('-r, --replace', 'replace', '')
+  .option('-p, --replace', 'replace', '')
   .option('-i, --init [server]', 'init', '')
   .option('-r, --republish [server]', 'republish', '')
   .parse(process.argv)
