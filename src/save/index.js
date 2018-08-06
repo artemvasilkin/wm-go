@@ -4,7 +4,7 @@ const { gratz, error } = require('../utils/out')
 const { show } = require('../utils/show')
 const { getCurrentBranch } = require('../utils/getCurrentBranch')
 
-const save = message => {
+const save = (message, force) => {
   try {
     if (message && typeof message === 'string') {
       if (
@@ -15,7 +15,9 @@ const save = message => {
         const currentBranch = getCurrentBranch()
 
         show(`git add .`)
-        show(`git commit -m "${message}"`)
+        force
+          ? show(`git commit -n -m "${message}"`)
+          : show(`git commit -m "${message}"`)
 
         try {
           show(`git push`)
@@ -42,5 +44,5 @@ const save = message => {
 }
 
 module.exports = {
-  save: message => save(message)
+  save: (message, force) => save(message, force)
 }
