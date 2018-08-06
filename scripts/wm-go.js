@@ -63,7 +63,7 @@ go(branches, (branch, index) => {
 
   if (program.republish && program.republish.length > 0) {
     open(branch)
-    republish(program.republish)
+    republish(program.republish, '', true)
   }
 })
 
