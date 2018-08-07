@@ -1,6 +1,6 @@
-const file = 'src/component.js'
+const file = 'package.json'
 
-const query = [/"ui-/, /`ui-/, / 'ui-/, /^'ui-/, /{'ui-/, /classNames\('ui-/]
+const query = [/whatToFind/]
 
 module.exports = {
   file: file,

@@ -1,15 +1,14 @@
-const file = 'src/style.css'
+const file = 'src/component.js'
 
-const original = [/\.section {\n\s\smin-width:\s320px;\n\s\spadding:\s30px\s0;/]
+const description = ''
 
-const replacement = [
-  `.section {
-  min-width: 320px;
-  padding: 30px 0;`
-]
+const original = [/whatToFind/]
+
+const replacement = [/whatToReplace/]
 
 module.exports = {
   file: file,
+  description: description,
   original: original,
   replacement: replacement
 }

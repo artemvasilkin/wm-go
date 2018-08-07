@@ -9,7 +9,7 @@ const find = (file, query, branch) => {
   if (fs.existsSync(file)) {
     for (var i = 0; i < query.length; i++) {
       if (query[i].test(fs.readFileSync(file).toString())) {
-        gratz(`found ${query}!`)
+        gratz(`found ${query[i]}!`)
 
         if (branch) {
           fs.appendFileSync(foundList, `${branch} - ${query[i]}\n`)

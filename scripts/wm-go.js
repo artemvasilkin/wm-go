@@ -13,6 +13,7 @@ const { file: searchFile, query } = require('../config/find')
 const { replace } = require('../src/replace')
 const {
   file: replaceFile,
+  description,
   original,
   replacement
 } = require('../config/replace')
@@ -33,7 +34,15 @@ program
   .option('-r, --republish [server]', 'republish', '')
   .parse(process.argv)
 
-const branches = getBranches(pattern).filter(branch => branch.match('/dev'))
+const branches = getBranches(pattern).filter(branch =>
+  branch.match(
+    /^(w)(\/)(series-\d+|zapdos|lucario)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/
+  )
+)
+// const branches = getBranches(pattern).filter(branch => branch.match(/^(d)(\/)([a-zA-Z0-9_]*)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/))
+// const branches = [
+//   `w/lucario/cover/dev`
+// ]
 const branchesLength = branches.length
 
 figlet(`${branchesLength} branches found`)
@@ -41,29 +50,53 @@ figlet(`${branchesLength} branches found`)
 go(branches, (branch, index) => {
   figlet(`${index + 1} of ${branchesLength}`)
 
+  // find
+
   if (program.find) {
     show(`git checkout ${branch}`)
     find(searchFile, query, branch)
   }
+
+  // kill
 
   if (program.kill && program.kill.length > 0) {
     open(branch)
     kill(program.kill, 'y')
   }
 
+  // replace
+
+  const replaceOptions = {
+    file: replaceFile,
+    description: description,
+    original: original,
+    replacement: replacement,
+    branch: branch
+  }
+
+  if (program.republish && program.republish.length > 0) {
+    replaceOptions['onFinish'] = () => {
+      republish(program.republish)
+    }
+  }
+
   if (program.replace) {
     open(branch)
-    replace(replaceFile, original, replacement, branch)
+    replace(replaceOptions)
   }
+
+  // init
 
   if (program.init && program.init.length > 0) {
     open(branch)
     init(program.init)
   }
 
-  if (program.republish && program.republish.length > 0) {
+  // republish
+
+  if (program.republish && program.republish.length > 0 && !program.replace) {
     open(branch)
-    republish(program.republish, '', true)
+    republish(program.republish)
   }
 })
 

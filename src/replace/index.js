@@ -2,31 +2,51 @@ const fs = require('fs')
 const appRoot = require('app-root-path')
 
 const { save } = require('../save')
-const { error } = require('../utils/out')
+const { error, alert, gratz } = require('../utils/out')
 
 const failedList = `${appRoot.path}/logs/failed-to-replace.txt`.replace(
   '/scripts/',
   '/'
 )
 
-const replace = (file, original, replacement, branch) => {
-  if (fs.existsSync(file)) {
-    for (var i = 0; i < original.length; i++) {
-      if (original[i].test(fs.readFileSync(file).toString())) {
-        fs.writeFileSync(
-          file,
-          fs
-            .readFileSync(file)
-            .toString()
-            .replace(original[i], replacement[i])
-        )
+const replace = options => {
+  if (fs.existsSync(options.file)) {
+    let finished = false
 
-        save('auto replace')
+    for (var i = 0; i < options.original.length; i++) {
+      alert(`start searching for ${options.original[i]} in ${options.file}`)
+      if (options.original[i].test(fs.readFileSync(options.file).toString())) {
+        finished = true
+
+        gratz(`found ${options.original[i]}`)
+        while (
+          options.original[i].test(fs.readFileSync(options.file).toString())
+        ) {
+          gratz(
+            `replaced ${options.original[i]} with ${
+              options.replacement[i]
+            } in ${options.file}`
+          )
+          fs.writeFileSync(
+            options.file,
+            fs
+              .readFileSync(options.file)
+              .toString()
+              .replace(options.original[i], options.replacement[i])
+          )
+        }
+
+        save(`auto replace: ${options.description}`, true)
       } else {
-        if (branch) {
-          fs.appendFileSync(failedList, `${branch}\n`)
+        error(`can't find ${options.original[i]}`)
+        if (options.branch) {
+          fs.appendFileSync(failedList, `${options.branch}\n`)
         }
       }
+    }
+
+    if (finished) {
+      options.onFinish()
     }
   } else {
     error('no file')
@@ -34,6 +54,5 @@ const replace = (file, original, replacement, branch) => {
 }
 
 module.exports = {
-  replace: (file, original, replacement, branch) =>
-    replace(file, original, replacement, branch)
+  replace: options => replace(options)
 }

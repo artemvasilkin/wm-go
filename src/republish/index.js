@@ -11,13 +11,13 @@ const { show } = require('../utils/show')
 const { save } = require('../save')
 const { pr } = require('../pr')
 
-const republishFlow = (domain, commit, force) => {
+const republishFlow = (domain, commit) => {
   try {
     npmInstall()
     login(domain)
     show(`wm-cli block commit ${commit || ''}`)
     show(`wm-cli block publish`)
-    save('update version', force)
+    save('update version')
     pr(domain)
   } catch (message) {
     error(message)
@@ -26,7 +26,7 @@ const republishFlow = (domain, commit, force) => {
   }
 }
 
-const republish = (server, commit, force) => {
+const republish = (server, commit) => {
   try {
     if (server) {
       const blockVersion = getBlock().version
@@ -37,14 +37,14 @@ const republish = (server, commit, force) => {
 
         if (domain === 'all') {
           fs.existsSync(stageFile)
-            ? republishFlow('co', commit, force)
+            ? republishFlow('co', commit)
             : error(`${stageFile} not found`)
           fs.existsSync(prodFile)
-            ? republishFlow('com', commit, force)
+            ? republishFlow('com', commit)
             : error(`${prodFile} not found`)
         } else {
           fs.existsSync(customFile)
-            ? republishFlow(domain, commit, force)
+            ? republishFlow(domain, commit)
             : error(`${customFile} not found`)
         }
       } else {
@@ -61,5 +61,5 @@ const republish = (server, commit, force) => {
 }
 
 module.exports = {
-  republish: (server, commit, force) => republish(server, commit, force)
+  republish: (server, commit) => republish(server, commit)
 }
