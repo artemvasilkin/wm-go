@@ -35,8 +35,6 @@ const replace = options => {
               .replace(options.original[i], options.replacement[i])
           )
         }
-
-        save(`auto replace: ${options.description}`, true)
       } else {
         error(`can't find ${options.original[i]}`)
         if (options.branch) {
@@ -46,6 +44,7 @@ const replace = options => {
     }
 
     if (finished) {
+      save(`auto replace: ${options.description}`, true)
       options.onFinish()
     }
   } else {

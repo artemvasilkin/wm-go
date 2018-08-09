@@ -16,6 +16,10 @@ const find = (file, query, branch) => {
         }
       } else {
         error('not found')
+
+        if (branch) {
+          fs.appendFileSync(foundList, `${branch} - not found\n`)
+        }
       }
     }
   } else {
