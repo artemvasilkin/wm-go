@@ -8,8 +8,12 @@ const inquirer = require('inquirer')
 const prompt = inquirer.createPromptModule()
 
 const openFlow = branch => {
-  show(`git checkout ${branch}`)
-  show(`git pull origin ${branch}`)
+  if (branch.toString() !== getCurrentBranch()) {
+    show(`git checkout ${branch}`)
+    show(`git pull origin ${branch}`)
+  } else {
+    error(`Already on ${branch}`)
+  }
 }
 
 const open = query => {
@@ -17,12 +21,11 @@ const open = query => {
     const validatorId = /(blockId)-([a-z0-9]{24})/
     const validatorName = /^(wireframe|design)-(series-\d+|[a-zA-Z0-9_]*)-([a-zA-Z0-9_-]*)$/
     const validatorShortBranch = /^(d|w)?(\/)?(series-\d+|[a-zA-Z0-9_]*)?(\/)?([a-zA-Z0-9_-]*)?(\/)?(dev|prod)?$/
-    let result = ''
 
     if (query.match(validatorId)) {
-      result = getBranchFromBlockID(query)
+      openFlow(getBranchFromBlockID(query))
     } else if (query.match(validatorName)) {
-      result = getBranchFromBlockName(query)
+      openFlow(getBranchFromBlockName(query))
     } else if (query.match(validatorShortBranch)) {
       const branches = getBranches().filter(
         item => item.match(query) && !item.match('/prod')
@@ -35,19 +38,13 @@ const open = query => {
           message: 'Choose the branch',
           choices: branches
         }).then(answer => {
-          result = answer.branch
+          openFlow(answer.branch)
         })
       } else {
-        result = branches
+        openFlow(branches)
       }
     } else {
-      result = query
-    }
-
-    if (result.toString() !== getCurrentBranch()) {
-      openFlow(result)
-    } else {
-      error(`Already on ${result}`)
+      openFlow(query)
     }
   } else {
     error('no branch specified')
