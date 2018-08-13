@@ -34,6 +34,10 @@ const replace = options => {
               .toString()
               .replace(options.original[i], options.replacement[i])
           )
+
+          if (options.once) {
+            break
+          }
         }
       } else {
         error(`can't find ${options.original[i]}`)

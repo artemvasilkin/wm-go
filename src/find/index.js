@@ -23,7 +23,7 @@ const find = (file, query, branch) => {
       }
     }
   } else {
-    error('no file')
+    error(`${file} not found`)
   }
 }
 

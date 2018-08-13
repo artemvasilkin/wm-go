@@ -6,22 +6,20 @@ const program = require('commander')
 
 const { figlet } = require('../src/utils/figlet')
 const { getBranches } = require('../src/utils/getBranches')
-
 const { goRound: go } = require('../src/goRound')
 const { find } = require('../src/find')
-const { file: searchFile, query } = require('../config/find')
 const { replace } = require('../src/replace')
-const {
-  file: replaceFile,
-  description,
-  original,
-  replacement
-} = require('../config/replace')
 const { kill } = require('../src/kill')
 const { init } = require('../src/init')
 const { republish } = require('../src/republish')
 const { open } = require('../src/open')
 const { show } = require('../src/utils/show')
+
+const {
+  goConfig,
+  findConfig,
+  replaceConfig
+} = require('../config/wm-config.js')
 
 const [, , ...args] = process.argv
 const pattern = args.length ? args[0] : false
@@ -34,15 +32,10 @@ program
   .option('-r, --republish [server]', 'republish', '')
   .parse(process.argv)
 
-const branches = getBranches(pattern).filter(branch =>
-  branch.match(
-    /^(w)(\/)(series-\d+|zapdos|lucario)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/
-  )
-)
-// const branches = getBranches(pattern).filter(branch => branch.match(/^(d)(\/)([a-zA-Z0-9_]*)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/))
-// const branches = [
-//   `w/lucario/cover/dev`
-// ]
+const branches =
+  goConfig && goConfig.branches
+    ? goConfig.branches
+    : getBranches(pattern).filter(branch => branch.match('/dev'))
 const branchesLength = branches.length
 
 figlet(`${branchesLength} branches found`)
@@ -54,7 +47,7 @@ go(branches, (branch, index) => {
 
   if (program.find) {
     show(`git checkout ${branch}`)
-    find(searchFile, query, branch)
+    find(findConfig.file, findConfig.query, branch)
   }
 
   // kill
@@ -66,13 +59,7 @@ go(branches, (branch, index) => {
 
   // replace
 
-  const replaceOptions = {
-    file: replaceFile,
-    description: description,
-    original: original,
-    replacement: replacement,
-    branch: branch
-  }
+  const replaceOptions = replaceConfig
 
   if (program.republish && program.republish.length > 0) {
     replaceOptions['onFinish'] = () => {
