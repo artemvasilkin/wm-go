@@ -9,4 +9,5 @@ const query = args.length ? args[0] : false
 
 open(query)
 
+console.log('')
 console.timeEnd('wm-open')

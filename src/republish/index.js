@@ -31,24 +31,25 @@ const republish = (server, commit) => {
     if (server) {
       const blockVersion = getBlock().version
 
-      if (blockVersion && blockVersion !== 'prod') {
+      if (blockVersion) {
         const domain = getDomain(server)
-        const customFile = `${baseFile}${domain}`
 
-        if (domain === 'all') {
-          fs.existsSync(stageFile)
-            ? republishFlow('co', commit)
-            : error(`${stageFile} not found`)
-          fs.existsSync(prodFile)
-            ? republishFlow('com', commit)
-            : error(`${prodFile} not found`)
-        } else {
+        if (
+          (blockVersion === 'prod' && domain === 'com') ||
+          (blockVersion === 'dev' && (domain === 'co' || domain === 'io'))
+        ) {
+          const customFile = `${baseFile}${domain}`
+
           fs.existsSync(customFile)
             ? republishFlow(domain, commit)
             : error(`${customFile} not found`)
+        } else {
+          error(
+            'Use /dev branch to republish on dev or stage server\nUse prod branch to republish on prod server'
+          )
         }
       } else {
-        error(`can't republish on prod branch`)
+        error(`can't detect branch version`)
       }
     } else {
       error('server is undefined')

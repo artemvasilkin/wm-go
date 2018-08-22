@@ -3,6 +3,7 @@ const fs = require('fs')
 const { gratz, error } = require('../utils/out')
 const { show } = require('../utils/show')
 const { getCurrentBranch } = require('../utils/getCurrentBranch')
+const { pr } = require('../pr')
 
 const save = (message, force) => {
   try {
@@ -25,7 +26,9 @@ const save = (message, force) => {
         } catch (error) {
           if (error.toString().includes('has no upstream branch')) {
             show(`git push --set-upstream origin ${currentBranch}`)
+            pr('com')
             gratz(`new remote branch ${currentBranch} created`)
+            gratz(`pull request created`)
           } else {
             error(error)
           }

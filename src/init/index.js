@@ -17,21 +17,32 @@ const initFlow = (server, domain) => {
   try {
     const block = getBlock()
 
-    if (block.version !== 'prod' && block.version.length > 0) {
-      npmInstall()
-      login(`${domain}`)
+    if (block.version.length > 0) {
+      if (
+        (block.version === 'prod' && domain === 'com') ||
+        (block.version === 'dev' && (domain === 'co' || domain === 'io'))
+      ) {
+        npmInstall()
+        login(`${domain}`)
 
-      show(
-        `wm-cli block init --name=${block.type}-${block.namespace}-${
-          block.name
-        } -c ${block.category} --wireframe=${block.isWireframe} ${block.roles} `
-      )
-      show(`wm-cli block publish`)
-      save(`init on ${server}`)
-      pr(domain)
-      updateHistory(domain, block, new Date())
+        show(
+          `wm-cli block init --name=${block.type}-${block.namespace}-${
+            block.name
+          } -c ${block.category} --wireframe=${block.isWireframe} ${
+            block.roles
+          } `
+        )
+        show(`wm-cli block publish`)
+        save(`init on ${server}`)
+        pr(domain)
+        updateHistory(domain, block, new Date())
+      } else {
+        error(
+          'Use /dev branch to init on dev or stage server\nUse prod branch to init on prod server'
+        )
+      }
     } else {
-      error(`can't init on prod branch`)
+      error(`can't detect branch version`)
     }
   } catch (message) {
     error(message)

@@ -27,9 +27,7 @@ const open = query => {
     } else if (query.match(validatorName)) {
       openFlow(getBranchFromBlockName(query))
     } else if (query.match(validatorShortBranch)) {
-      const branches = getBranches().filter(
-        item => item.match(query) && !item.match('/prod')
-      )
+      const branches = getBranches().filter(item => item.match(query))
 
       if (branches.length > 1) {
         prompt({

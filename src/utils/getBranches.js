@@ -12,6 +12,11 @@ module.exports = {
       .filter(
         branch => (pattern ? branch.match(new RegExp(pattern, 'i')) : true)
       )
-      .filter(branch => !branch.match('uikit') && !branch.match('default'))
+      .filter(
+        branch =>
+          !branch.match('uikit') &&
+          !branch.match('theme') &&
+          !branch.match('default')
+      )
   }
 }

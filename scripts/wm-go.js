@@ -33,9 +33,7 @@ program
   .parse(process.argv)
 
 const branches =
-  goConfig && goConfig.branches
-    ? goConfig.branches
-    : getBranches(pattern).filter(branch => branch.match('/dev'))
+  goConfig && goConfig.branches ? goConfig.branches : getBranches(pattern)
 const branchesLength = branches.length
 
 figlet(`${branchesLength} branches found`)
