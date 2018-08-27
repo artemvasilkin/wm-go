@@ -21,7 +21,7 @@ const killFlow = (domain, server) => {
     show(`wm-cli block purge`)
 
     save(`kill block on ${server}`)
-    pr(domain)
+    pr()
   } else {
     out.error(`can't kill block on prod branch`)
   }

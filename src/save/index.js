@@ -26,7 +26,7 @@ const save = (message, force) => {
         } catch (error) {
           if (error.toString().includes('has no upstream branch')) {
             show(`git push --set-upstream origin ${currentBranch}`)
-            pr('com')
+            pr()
             gratz(`new remote branch ${currentBranch} created`)
             gratz(`pull request created`)
           } else {

@@ -4,6 +4,6 @@ console.time('wm-pr')
 
 const { pr } = require('../src/pr')
 
-pr('com')
+pr()
 
 console.timeEnd('wm-pr')

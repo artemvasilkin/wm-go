@@ -34,7 +34,7 @@ const initFlow = (server, domain) => {
         )
         show(`wm-cli block publish`)
         save(`init on ${server}`)
-        pr(domain)
+        pr()
         updateHistory(domain, block, new Date())
       } else {
         error(
