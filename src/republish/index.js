@@ -1,10 +1,11 @@
 const fs = require('fs')
 
-const { stageFile, prodFile, baseFile } = require('../../config/globals')
+const { baseFile } = require('../../config/globals')
 
 const { getBlock } = require('../utils/getBlock')
 const { getDomain } = require('../utils/getDomain')
 const { error } = require('../utils/out')
+const { update } = require('../update')
 const { npmInstall } = require('../utils/npmInstall')
 const { login } = require('../login')
 const { show } = require('../utils/show')
@@ -13,6 +14,7 @@ const { pr } = require('../pr')
 
 const republishFlow = (domain, commit) => {
   try {
+    update()
     npmInstall()
     login(domain)
     show(`wm-cli block commit ${commit || ''}`)
