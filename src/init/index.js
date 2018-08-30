@@ -20,7 +20,8 @@ const initFlow = (server, domain) => {
     if (block.version.length > 0) {
       if (
         (block.version === 'prod' && domain === 'com') ||
-        (block.version === 'dev' && (domain === 'co' || domain === 'io'))
+        (block.version === 'dev' &&
+          (domain === 'co' || domain === 'io' || domain === 'app'))
       ) {
         npmInstall()
         login(`${domain}`)

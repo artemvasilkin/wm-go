@@ -20,6 +20,9 @@ module.exports = {
       case 'all':
         domain = 'all'
         break
+      case 'app':
+        domain = 'app'
+        break
       default:
         domain = ''
         out.error('server in undefined')

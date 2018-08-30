@@ -49,6 +49,15 @@ const makeConfig = () => {
     'wmUserPassword is undefined',
     { echo: '*' }
   )
+  configs.wmUserEmail.app = prompt(
+    'Enter wm-cli email for app server: ',
+    'wmUserEmail is undefined'
+  )
+  configs.wmUserPassword.app = prompt(
+    'Enter wm-cli password for app server: ',
+    'wmUserPassword is undefined',
+    { echo: '*' }
+  )
 
   if (
     configs.gitHubToken &&
@@ -65,9 +74,14 @@ const makeConfig = () => {
     configs.wmUserEmail.com.match(
       /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
     ) &&
+    configs.wmUserEmail.app &&
+    configs.wmUserEmail.app.match(
+      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
+    ) &&
     configs.wmUserPassword.io &&
     configs.wmUserPassword.co &&
-    configs.wmUserPassword.com
+    configs.wmUserPassword.com &&
+    configs.wmUserPassword.app
   ) {
     fs.writeFileSync(`${configFile}`, JSON.stringify(configs))
 
@@ -80,6 +94,8 @@ const makeConfig = () => {
     out(configs.wmUserPassword.co)
     out(configs.wmUserEmail.com)
     out(configs.wmUserPassword.com)
+    out(configs.wmUserEmail.app)
+    out(configs.wmUserPassword.app)
   } else {
     if (isNull(configs.gitHubToken)) {
       error('git-hub token is empty')
@@ -99,6 +115,10 @@ const makeConfig = () => {
 
     if (isNull(configs.wmUserEmail.com)) {
       error('wm-cli email for prod server is empty')
+    }
+
+    if (isNull(configs.wmUserEmail.app)) {
+      error('wm-cli email for app server is empty')
     }
 
     if (
@@ -128,6 +148,15 @@ const makeConfig = () => {
       error('wm-cli email for prod server is not a valid email')
     }
 
+    if (
+      !isNull(configs.wmUserEmail.app) &&
+      !configs.wmUserEmail.app.match(
+        /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
+      )
+    ) {
+      error('wm-cli email for app server is not a valid email')
+    }
+
     if (isNull(configs.wmUserPassword.io)) {
       error('wm-cli password for prod dev is empty')
     }
@@ -138,6 +167,10 @@ const makeConfig = () => {
 
     if (isNull(configs.wmUserPassword.com)) {
       error('wm-cli password for prod server is empty')
+    }
+
+    if (isNull(configs.wmUserPassword.app)) {
+      error('wm-cli password for app server is empty')
     }
   }
 }
@@ -197,6 +230,8 @@ const showConfigs = () => {
       out(configs.wmUserPassword.co)
       out(configs.wmUserEmail.com)
       out(configs.wmUserPassword.com)
+      out(configs.wmUserEmail.app)
+      out(configs.wmUserPassword.app)
     }
   } catch (message) {
     error(message)

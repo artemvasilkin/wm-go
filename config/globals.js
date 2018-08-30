@@ -3,19 +3,27 @@ const appRoot = require('app-root-path')
 const devServer = 'dev'
 const stageServer = 'stage'
 const prodServer = 'prod'
+const appServer = 'app'
 
 const servers = [`${devServer}`, `${stageServer}`, `${prodServer}`]
 
 const devDomain = 'io'
 const stageDomain = 'co'
 const prodDomain = 'com'
+const appDomain = 'app'
 
-const domains = [`${devDomain}`, `${stageDomain}`, `${prodDomain}`]
+const domains = [
+  `${devDomain}`,
+  `${stageDomain}`,
+  `${prodDomain}`,
+  `${appDomain}`
+]
 
 const baseFile = `block.https.weblium.`
 const devFile = `${baseFile}${devDomain}`
 const stageFile = `${baseFile}${stageDomain}`
 const prodFile = `${baseFile}${prodDomain}`
+const appFile = `${baseFile}${appDomain}`
 
 const categories = [
   'About',

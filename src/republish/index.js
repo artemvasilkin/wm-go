@@ -38,7 +38,8 @@ const republish = (server, commit) => {
 
         if (
           (blockVersion === 'prod' && domain === 'com') ||
-          (blockVersion === 'dev' && (domain === 'co' || domain === 'io'))
+          (blockVersion === 'dev' &&
+            (domain === 'co' || domain === 'io' || domain === 'app'))
         ) {
           const customFile = `${baseFile}${domain}`
 
