@@ -33,12 +33,19 @@ program
   .parse(process.argv)
 
 const branches =
-  goConfig && goConfig.branches ? goConfig.branches : getBranches(pattern)
+  goConfig && goConfig.branches
+    ? goConfig.branches
+    : getBranches(pattern).filter(branch =>
+      branch.match(
+        /^(w)(\/)(series-\d+|zapdos)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/
+      )
+    )
 const branchesLength = branches.length
 
 figlet(`${branchesLength} branches found`)
 
 go(branches, (branch, index) => {
+  // console.log(branch)
   figlet(`${index + 1} of ${branchesLength}`)
 
   // find
@@ -58,10 +65,15 @@ go(branches, (branch, index) => {
   // replace
 
   const replaceOptions = replaceConfig
+  const republishOptions = {
+    server: program.republish,
+    commit: '',
+    skipUpdate: false
+  }
 
   if (program.republish && program.republish.length > 0) {
     replaceOptions['onFinish'] = () => {
-      republish(program.republish)
+      republish(republishOptions)
     }
   }
 
@@ -81,7 +93,7 @@ go(branches, (branch, index) => {
 
   if (program.republish && program.republish.length > 0 && !program.replace) {
     open(branch)
-    republish(program.republish)
+    republish(republishOptions)
   }
 })
 

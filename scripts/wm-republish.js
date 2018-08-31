@@ -7,9 +7,11 @@ const { republish } = require('../src/republish')
 const [, , ...args] = process.argv
 const params = args.length ? args : false
 
-const server = params[0]
-const commit = params[1]
+const options = {
+  server: params[0],
+  commit: params[1]
+}
 
-republish(server, commit)
+republish(options)
 
 console.timeEnd('wm-republish')

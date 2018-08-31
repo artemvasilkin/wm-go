@@ -12,9 +12,9 @@ const { show } = require('../utils/show')
 const { save } = require('../save')
 const { pr } = require('../pr')
 
-const republishFlow = (domain, commit) => {
+const republishFlow = (domain, commit, skipUpdate) => {
   try {
-    update()
+    update(skipUpdate)
     npmInstall()
     login(domain)
     show(`wm-cli block commit ${commit || ''}`)
@@ -28,13 +28,13 @@ const republishFlow = (domain, commit) => {
   }
 }
 
-const republish = (server, commit) => {
+const republish = options => {
   try {
-    if (server) {
+    if (options.server) {
       const blockVersion = getBlock().version
 
       if (blockVersion) {
-        const domain = getDomain(server)
+        const domain = getDomain(options.server)
 
         if (
           (blockVersion === 'prod' && domain === 'com') ||
@@ -44,7 +44,7 @@ const republish = (server, commit) => {
           const customFile = `${baseFile}${domain}`
 
           fs.existsSync(customFile)
-            ? republishFlow(domain, commit)
+            ? republishFlow(domain, options.commit, options.skipUpdate)
             : error(`${customFile} not found`)
         } else {
           error(
@@ -65,5 +65,5 @@ const republish = (server, commit) => {
 }
 
 module.exports = {
-  republish: (server, commit) => republish(server, commit)
+  republish: options => republish(options)
 }
