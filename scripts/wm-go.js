@@ -68,7 +68,7 @@ go(branches, (branch, index) => {
   const republishOptions = {
     server: program.republish,
     commit: '',
-    skipUpdate: false
+    skipUpdate: true
   }
 
   if (program.republish && program.republish.length > 0) {
