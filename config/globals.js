@@ -55,7 +55,8 @@ const categories = [
   'testimonials',
   'description',
   'features',
-  'embed'
+  'embed',
+  'simple'
 ]
 
 const history =
