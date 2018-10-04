@@ -17,9 +17,10 @@ const { show } = require('../src/utils/show')
 
 const {
   goConfig,
+  customFunction,
   findConfig,
   replaceConfig
-} = require('../config/wm-config.js')
+} = require('../config/.wmgorc')
 
 const [, , ...args] = process.argv
 const pattern = args.length ? args[0] : false
@@ -30,16 +31,20 @@ program
   .option('-p, --replace', 'replace', '')
   .option('-i, --init [server]', 'init', '')
   .option('-r, --republish [server]', 'republish', '')
+  .option('-c, --custom', 'custom', '')
   .parse(process.argv)
 
-const branches =
-  goConfig && goConfig.branches
-    ? goConfig.branches
-    : getBranches(pattern).filter(branch =>
-      branch.match(
-        /^(w)(\/)(series-\d+|zapdos)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/
-      )
+const filterBranches = () => {
+  if (goConfig && goConfig.customList) {
+    return goConfig.branches
+  } else {
+    return getBranches(pattern).filter(branch =>
+      branch.match(/^(w)(\/)(series-\d+|zapdos)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/)
     )
+  }
+}
+
+const branches = filterBranches()
 const branchesLength = branches.length
 
 figlet(`${branchesLength} branches found`)
@@ -47,6 +52,12 @@ figlet(`${branchesLength} branches found`)
 go(branches, (branch, index) => {
   // console.log(branch)
   figlet(`${index + 1} of ${branchesLength}`)
+
+  // customFunction
+
+  if (program.custom && customFunction.enabled) {
+    customFunction.function(branches, branch, index)
+  }
 
   // find
 

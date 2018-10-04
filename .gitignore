@@ -3,5 +3,6 @@ wm-config.json
 wm-config.js
 config/wm-config.json
 config/wm-config.js
+config/.wmgorc.js
 report.txt
 logs/*
