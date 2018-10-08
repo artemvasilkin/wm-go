@@ -19,7 +19,7 @@ const domains = [
   `${appDomain}`
 ]
 
-const baseFile = `block.https.weblium.`
+const baseFile = `block.https.api.weblium.`
 const devFile = `${baseFile}${devDomain}`
 const stageFile = `${baseFile}${stageDomain}`
 const prodFile = `${baseFile}${prodDomain}`
