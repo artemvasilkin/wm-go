@@ -20,7 +20,7 @@ const open = query => {
   if (query) {
     const validatorId = /(blockId)-([a-z0-9]{24})/
     const validatorName = /^(wireframe|design)-(series-\d+|[a-zA-Z0-9_]*)-([a-zA-Z0-9_-]*)$/
-    const validatorShortBranch = /^(d|w)?(\/)?(series-\d+|[a-zA-Z0-9_]*)?(\/)?([a-zA-Z0-9_-]*)?(\/)?(dev|prod)?$/
+    const validatorShortBranch = /^(d|w)?(\/)?(series-\d+|[a-zA-Z0-9_]*)?(\/)?([a-zA-Z0-9_-]*)?(\/)?(dev|prod|theme)?$/
 
     if (query.match(validatorId)) {
       openFlow(getBranchFromBlockID(query))
