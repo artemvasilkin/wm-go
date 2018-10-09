@@ -74,7 +74,10 @@ const showHistory = () => {
 
 const updateHistory = (domain, block, date) => {
   try {
-    if (domain === 'com' && fs.existsSync(`block.https.weblium.${domain}`)) {
+    if (
+      domain === 'com' &&
+      fs.existsSync(`block.https.api.weblium.${domain}`)
+    ) {
       show(`git checkout history`)
       show(`git pull origin history`)
 

@@ -19,44 +19,44 @@ const domains = [
   `${appDomain}`
 ]
 
-const baseFile = `block.https.weblium.`
+const baseFile = `block.https.api.weblium.`
 const devFile = `${baseFile}${devDomain}`
 const stageFile = `${baseFile}${stageDomain}`
 const prodFile = `${baseFile}${prodDomain}`
 const appFile = `${baseFile}${appDomain}`
 
 const categories = [
-  'About',
-  'Awards',
-  'Blog',
-  'Careers',
-  'Contacts',
-  'Cover',
-  'CTA',
-  'Events',
-  'FAQ',
-  'Footer',
-  'Gallery',
-  'Header',
-  'Numbers',
-  'Partners',
-  'Pricing',
-  'Process',
-  'Projects',
-  'Quote',
-  'Services',
-  'Schedule',
-  'Follow-us',
-  'Team',
-  'Testimonials',
-  'Text',
-  'Why',
-  'Table',
-  'Menu',
-  'History',
-  'Extra',
-  'Simple',
-  'Counter'
+  'about',
+  'awards',
+  'blog',
+  'careers',
+  'contacts',
+  'countdown',
+  'cover',
+  'cta',
+  'other',
+  'faq',
+  'social',
+  'footer',
+  'gallery',
+  'header',
+  'timeline',
+  'menu',
+  'numbers',
+  'partners',
+  'pricing',
+  'process',
+  'projects',
+  'quote',
+  'schedule',
+  'services',
+  'elements',
+  'team',
+  'testimonials',
+  'description',
+  'features',
+  'embed',
+  'simple'
 ]
 
 const history =
