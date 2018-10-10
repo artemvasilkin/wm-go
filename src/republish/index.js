@@ -38,7 +38,10 @@ const republish = options => {
         if (
           (blockVersion === 'prod' && domain === 'com') ||
           (blockVersion === 'dev' &&
-            (domain === 'co' || domain === 'io' || domain === 'app'))
+            (domain === 'co' ||
+              domain === 'io' ||
+              domain === 'app' ||
+              domain === 'local'))
         ) {
           const host = getHost(options.server)
           const customFile = host.config
