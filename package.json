@@ -26,8 +26,6 @@
   "scripts": {
     "precommit": "lint-staged",
     "release": "np",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
   },
   "lint-staged": {
     "*.js": [
@@ -73,6 +71,5 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.1.0",
     "prettier-eslint-cli": "^4.7.1",
-    "vuepress": "^1.0.0-alpha.8"
   }
 }
