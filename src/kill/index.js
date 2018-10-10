@@ -4,17 +4,15 @@ const prompt = require('prompt-sync')()
 const out = require('../utils/out')
 const { show } = require('../utils/show')
 const { getDomain } = require('../utils/getDomain')
+const { getHost } = require('../utils/getHost')
 const { save } = require('../save')
-// const { getBlock } = require('../utils/getBlock')
 const { getBlockID } = require('../utils/getBlockID')
 const { login } = require('../login')
 const { pr } = require('../pr')
 
-const killFlow = (domain, server) => {
-  // const block = getBlock()
-  const blockID = getBlockID(domain)
+const killFlow = (domain, server, host) => {
+  const blockID = getBlockID(host)
 
-  // if (block.version !== 'prod' && block.version.length > 0) {
   login(`${domain}`)
 
   show(`wm-cli block remove ${blockID}`)
@@ -22,9 +20,6 @@ const killFlow = (domain, server) => {
 
   save(`kill block on ${server}`)
   pr()
-  // } else {
-  // out.error(`can't kill block on prod branch`)
-  // }
 }
 
 module.exports = {
@@ -45,24 +40,12 @@ module.exports = {
 
       if (areyousure === 'y' || areyousure === 'Y') {
         const domain = getDomain(server)
+        const host = getHost(server)
 
-        if (domain === 'all') {
-          if (fs.existsSync(`block.https.api.weblium.co`)) {
-            killFlow('co', 'stage')
-          } else {
-            out.error(`block.https.api.weblium.co not found`)
-          }
-          if (fs.existsSync(`block.https.api.weblium.com`)) {
-            killFlow('com', 'prod')
-          } else {
-            out.error(`block.https.api.weblium.com not found`)
-          }
+        if (fs.existsSync(host.config)) {
+          killFlow(domain, server, host)
         } else {
-          if (fs.existsSync(`block.https.api.weblium.${domain}`)) {
-            killFlow(domain, server)
-          } else {
-            out.error(`block.https.api.weblium.${domain} not found`)
-          }
+          out.error(`${host.config} not found`)
         }
       } else {
         out.gratz('Aborted')

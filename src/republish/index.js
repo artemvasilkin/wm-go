@@ -1,9 +1,8 @@
 const fs = require('fs')
 
-const { baseFile } = require('../../config/globals')
-
 const { getBlock } = require('../utils/getBlock')
 const { getDomain } = require('../utils/getDomain')
+const { getHost } = require('../utils/getHost')
 const { error } = require('../utils/out')
 const { update } = require('../update')
 const { npmInstall } = require('../utils/npmInstall')
@@ -41,7 +40,8 @@ const republish = options => {
           (blockVersion === 'dev' &&
             (domain === 'co' || domain === 'io' || domain === 'app'))
         ) {
-          const customFile = `${baseFile}${domain}`
+          const host = getHost(options.server)
+          const customFile = host.config
 
           fs.existsSync(customFile)
             ? republishFlow(domain, options.commit, options.skipUpdate)

@@ -1,12 +1,11 @@
 const fs = require('fs')
 
-const { baseFile } = require('../../config/globals')
-
 const { updateHistory } = require('../history')
 
 const { alert, error } = require('../utils/out')
 const { show } = require('../utils/show')
 const { getDomain } = require('../utils/getDomain')
+const { getHost } = require('../utils/getHost')
 const { getBlock } = require('../utils/getBlock')
 const { save } = require('../save')
 const { npmInstall } = require('../utils/npmInstall')
@@ -21,7 +20,10 @@ const initFlow = (server, domain) => {
       if (
         (block.version === 'prod' && domain === 'com') ||
         (block.version === 'dev' &&
-          (domain === 'co' || domain === 'io' || domain === 'app'))
+          (domain === 'co' ||
+            domain === 'io' ||
+            domain === 'app' ||
+            domain === 'local'))
       ) {
         npmInstall()
         login(`${domain}`)
@@ -56,8 +58,9 @@ const init = server => {
   try {
     if (server) {
       const domain = getDomain(server)
+      const host = getHost(server)
 
-      if (!fs.existsSync(`${baseFile}${domain}`)) {
+      if (!fs.existsSync(host.config)) {
         initFlow(server, domain)
       } else {
         alert('already published')

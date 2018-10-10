@@ -17,8 +17,8 @@ module.exports = {
       case 'prod':
         domain = 'com'
         break
-      case 'all':
-        domain = 'all'
+      case 'local':
+        domain = 'local'
         break
       case 'app':
         domain = 'app'
