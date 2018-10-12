@@ -10,7 +10,7 @@ module.exports = {
         {
           title: 'Guide',
           collapsable: false,
-          children: ['', 'getting-started', 'codebase', 'database']
+          children: ['', 'getting-started', 'commands']
         }
       ]
     }
