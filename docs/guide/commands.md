@@ -4,10 +4,6 @@ sidebarDepth: 2
 
 # Commands
 
-__Table of content:__
-
-[[toc]]
-
 ## Opening & Saving
 
 :::warning
@@ -15,8 +11,6 @@ This section describes how to work with __code base__, i.e. commands below will 
 :::
 
 ### Open block
-
-__Example:__
 
 ```console
 $ wm-open <searchQuery>
@@ -36,8 +30,6 @@ __What it does:__
 - Pull the branch from remote
 
 ### Save changes
-
-__Example:__
 
 ```console
 $ wm-save <"commit message"> [-f|--force]
@@ -72,8 +64,6 @@ This section describes how to work with __data base__, i.e. commands below may a
 
 ### Add (initialize) new block on a certain server
 
-__Example:__
-
 ```console
 $ wm-init <server>
 ```
@@ -98,8 +88,6 @@ __What it does:__
 
 ### Republish an existing block on a certain server
 
-__Example:__
-
 ```console
 $ wm-republish <server>
 ```
@@ -116,8 +104,6 @@ __What it does:__
 - Create a Pull Request to the prod branch
 
 ### Remove block from certain database
-
-__Example:__
 
 ```console
 $ wm-kill <server>
