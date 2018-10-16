@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-console.time('wm-go')
+const begin = new Date()
+
+const { slack } = require('../src/utils/slack')
+const { getConfigs } = require('../src/config')
 
 const program = require('commander')
 
@@ -24,6 +27,8 @@ const {
 
 const [, , ...args] = process.argv
 const pattern = args.length ? args[0] : false
+
+slack(`*_@${getConfigs().slackUsername}_ started* \`wm-go ${args.join(' ')}\``)
 
 program
   .option('-f, --find', 'find', '')
@@ -57,6 +62,16 @@ go(branches, (branch, index) => {
 
   if (program.custom && customFunction.enabled) {
     customFunction.function(branches, branch, index)
+
+    if (index === 0) {
+      slack(`\`\`\`\n${customFunction.function.toString()}\n\`\`\``)
+    } else if (index % 10 === 0 || index === branchesLength) {
+      slack(
+        `_@${
+          getConfigs().slackUsername
+        }_ executed custom function on *${index}* of *${branchesLength}* blocks`
+      )
+    }
   }
 
   // find
@@ -64,6 +79,14 @@ go(branches, (branch, index) => {
   if (program.find) {
     show(`git checkout ${branch}`)
     find(findConfig.file, findConfig.query, branch)
+
+    if (index !== 0 && (index % 50 === 0 || index === branchesLength)) {
+      slack(
+        `_@${
+          getConfigs().slackUsername
+        }_ searched *${index}* of *${branchesLength}* blocks`
+      )
+    }
   }
 
   // kill
@@ -71,6 +94,16 @@ go(branches, (branch, index) => {
   if (program.kill && program.kill.length > 0) {
     open(branch)
     kill(program.kill, 'y')
+
+    if (index !== 0 && (index % 10 === 0 || index === branchesLength)) {
+      slack(
+        `_@${
+          getConfigs().slackUsername
+        }_ deleted *${index}* of *${branchesLength}* blocks on ${
+          program.kill
+        } server`
+      )
+    }
   }
 
   // replace
@@ -85,12 +118,30 @@ go(branches, (branch, index) => {
   if (program.republish && program.republish.length > 0) {
     replaceOptions['onFinish'] = () => {
       republish(republishOptions)
+
+      if (index !== 0 && (index % 10 === 0 || index === branchesLength)) {
+        slack(
+          `_@${
+            getConfigs().slackUsername
+          }_ republished *${index}* of *${branchesLength}* blocks on ${
+            program.republish
+          } server`
+        )
+      }
     }
   }
 
   if (program.replace) {
     open(branch)
     replace(replaceOptions)
+
+    if (index !== 0 && (index % 10 === 0 || index === branchesLength)) {
+      slack(
+        `_@${
+          getConfigs().slackUsername
+        }_ replaced data on *${index}* of *${branchesLength}* blocks`
+      )
+    }
   }
 
   // init
@@ -98,6 +149,16 @@ go(branches, (branch, index) => {
   if (program.init && program.init.length > 0) {
     open(branch)
     init(program.init)
+
+    if (index !== 0 && (index % 10 === 0 || index === branchesLength)) {
+      slack(
+        `_@${
+          getConfigs().slackUsername
+        }_ initialized *${index}* of *${branchesLength}* blocks on ${
+          program.republish
+        } server`
+      )
+    }
   }
 
   // republish
@@ -105,7 +166,24 @@ go(branches, (branch, index) => {
   if (program.republish && program.republish.length > 0 && !program.replace) {
     open(branch)
     republish(republishOptions)
+
+    if (index !== 0 && (index % 10 === 0 || index === branchesLength)) {
+      slack(
+        `_@${
+          getConfigs().slackUsername
+        }_ republished *${index}* of *${branchesLength}* blocks on ${
+          program.republish
+        } server`
+      )
+    }
   }
 })
 
-console.timeEnd('wm-go')
+const end = new Date()
+const timeSpent = `${(end - begin) / 1000} seconds`
+
+slack(
+  `*_@${getConfigs().slackUsername}_ finished* \`wm-go ${args.join(
+    ' '
+  )}\` in *${timeSpent}*`
+)
