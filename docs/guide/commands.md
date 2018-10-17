@@ -4,7 +4,7 @@ sidebarDepth: 2
 
 # Commands
 
-## Opening & Saving
+## Opening and Saving
 
 :::warning
 This section describes how to work with __code base__, i.e. commands below will affect [blocks repository](https://github.com/webliumteam/blocks) contents.
