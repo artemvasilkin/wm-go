@@ -56,10 +56,6 @@ const branchesLength = branches.length
 
 figlet(`${branchesLength} branches found`)
 
-if (program.custom && customFunction.enabled) {
-  slack(`\`\`\`\n${customFunction.function.toString()}\n\`\`\``)
-}
-
 go(branches, (branch, index) => {
   // console.log(branch)
   figlet(`${index + 1} of ${branchesLength}`)
@@ -69,7 +65,9 @@ go(branches, (branch, index) => {
   if (program.custom && customFunction.enabled) {
     customFunction.function(branches, branch, index)
 
-    if (index % 10 === 0 || index === branchesLength) {
+    if (index === 0) {
+      slack(`\`\`\`\n${customFunction.function.toString()}\n\`\`\``)
+    } else if (index % 10 === 0 || index === branchesLength) {
       slack(
         `_@${
           getConfigs().slackUsername
