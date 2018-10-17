@@ -5,7 +5,7 @@ const fs = require('fs')
 
 const update = skip => {
   if (!skip) {
-    const willUpdate = prompt('Do you want to update block to major version?')
+    const willUpdate = prompt('Do you want to update to major version?')
 
     if (willUpdate === 'y' || willUpdate === 'Y') {
       const currentVersion = getPackageVersion()

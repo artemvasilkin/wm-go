@@ -14,7 +14,7 @@ module.exports = {
         host = {
           protocol: 'https',
           name: 'api.weblium.io',
-          config: `block.https.api.weblium.io`
+          config: `.https.api.weblium.io`
         }
         break
       case 'co':
@@ -22,7 +22,7 @@ module.exports = {
         host = {
           protocol: 'https',
           name: 'api.weblium.co',
-          config: `block.https.api.weblium.co`
+          config: `.https.api.weblium.co`
         }
         break
       case 'com':
@@ -30,21 +30,21 @@ module.exports = {
         host = {
           protocol: 'https',
           name: 'api.weblium.com',
-          config: `block.https.api.weblium.com`
+          config: `.https.api.weblium.com`
         }
         break
       case 'app':
         host = {
           protocol: 'https',
           name: 'api.weblium.app',
-          config: `block.https.api.weblium.app`
+          config: `.https.api.weblium.app`
         }
         break
       case 'local':
         host = {
           protocol: 'http',
           name: '192.168.45.90:3000',
-          config: `block.http.192.168.45.90.3000`
+          config: `.http.192.168.45.90.3000`
         }
         break
       default:

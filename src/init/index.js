@@ -29,13 +29,11 @@ const initFlow = (server, domain) => {
         login(`${domain}`)
 
         show(
-          `wm-cli block init --name=${block.type}-${block.namespace}-${
-            block.name
-          } -c ${block.category} --wireframe=${block.isWireframe} ${
-            block.roles
-          } `
+          `wm-cli ${block.api.call} init ${block.api.name} ${
+            block.api.category
+          } ${block.api.wireframe} ${block.api.roles}`
         )
-        show(`wm-cli block publish`)
+        show(`wm-cli ${block.api.call} publish`)
         save(`init on ${server}`)
         pr()
         updateHistory(domain, block, new Date())
