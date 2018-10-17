@@ -42,9 +42,11 @@ program
 const filterBranches = () => {
   if (goConfig && goConfig.customList) {
     return goConfig.branches
+  } else if (goConfig && goConfig.customPattern && !goConfig.customList) {
+    return getBranches(goConfig.pattern)
   } else {
     return getBranches(pattern).filter(branch =>
-      branch.match(/^(w)(\/)(series-\d+|zapdos)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/)
+      branch.match(/^(w)(\/)(series-\d+)(\/)([a-zA-Z0-9_-]*)(\/)(dev)$/)
     )
   }
 }
