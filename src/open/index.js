@@ -20,13 +20,19 @@ const open = query => {
   if (query) {
     const validatorId = /(blockId)-([a-z0-9]{24})/
     const validatorName = /^(wireframe|design)-(series-\d+|[a-zA-Z0-9_]*)-([a-zA-Z0-9_-]*)$/
-    const validatorShortBranch = /^(d|w)?(\/)?(series-\d+|[a-zA-Z0-9_]*)?(\/)?([a-zA-Z0-9_-]*)?(\/)?(dev|prod|theme)?$/
+    const validatorBlockBranch = /^(d|w)?(\/)?(series-\d+|[a-zA-Z0-9_]*)?(\/)?([a-zA-Z0-9_-]*)?(\/)?(dev|prod)?$/
+    const validatorThemeBranch = /^(theme)?(\/)?([a-zA-Z0-9_]*)?(\/)?(dev|prod)$/
+    const validatorUikitBranch = /^(uikit)?(\/)?([a-zA-Z0-9_]*)?(\/)?(dev|prod)?$/
 
     if (query.match(validatorId)) {
       openFlow(getBranchFromBlockID(query))
     } else if (query.match(validatorName)) {
       openFlow(getBranchFromBlockName(query))
-    } else if (query.match(validatorShortBranch)) {
+    } else if (
+      query.match(validatorBlockBranch) ||
+      query.match(validatorThemeBranch) ||
+      query.match(validatorUikitBranch)
+    ) {
       const branches = getBranches().filter(item => item.match(query))
 
       if (branches.length > 1) {
