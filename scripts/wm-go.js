@@ -66,7 +66,7 @@ go(branches, (branch, index) => {
     customFunction.function(branches, branch, index)
 
     if (index === 0) {
-      slack(`\`\`\`\n${customFunction.function.toString()}\n\`\`\``)
+      slack(`\`\`\`\n${customFunction.function}\n\`\`\``)
     } else if (index % 10 === 0 || index === branchesLength) {
       slack(
         `_@${
