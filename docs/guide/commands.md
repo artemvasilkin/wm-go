@@ -10,7 +10,7 @@ sidebarDepth: 2
 This section describes how to work with __code base__, i.e. commands below will affect [blocks repository](https://github.com/webliumteam/blocks) contents.
 :::
 
-### Open block
+### wm-open: Open block
 
 ```console
 $ wm-open <searchQuery>
@@ -29,7 +29,7 @@ __What it does:__
 - Checkout the branch
 - Pull the branch from remote
 
-### Save changes
+### wm-save: Save changes
 
 ```console
 $ wm-save <"commit message"> [-f|--force]
@@ -62,7 +62,7 @@ __What it does:__
 This section describes how to work with __data base__, i.e. commands below may affect __developing, staging and/or production servers__.
 :::
 
-### Add (initialize) new block on a certain server
+### wm-init: Add (initialize) new block on a certain server
 
 ```console
 $ wm-init <server>
@@ -86,7 +86,7 @@ __What it does:__
   - In case it's a new branch - push and set the remote as upstream
 - Create a Pull Request to the prod branch
 
-### Republish an existing block on a certain server
+### wm-republish: Republish an existing block on a certain server
 
 ```console
 $ wm-republish <server>
@@ -103,7 +103,7 @@ __What it does:__
   - In case it's a new branch - push and set the remote as upstream
 - Create a Pull Request to the prod branch
 
-### Remove block from certain database
+### wm-kill: Remove block from certain database
 
 ```console
 $ wm-kill <server>
