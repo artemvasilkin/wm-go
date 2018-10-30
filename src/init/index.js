@@ -18,7 +18,8 @@ const initFlow = (server, domain) => {
 
     if (block.version.length > 0) {
       if (
-        (block.version === 'prod' && domain === 'com') ||
+        (block.version === 'prod' &&
+          (domain === 'com' || domain === 'local')) ||
         (block.version === 'dev' &&
           (domain === 'co' ||
             domain === 'io' ||

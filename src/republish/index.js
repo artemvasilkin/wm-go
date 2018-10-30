@@ -38,7 +38,8 @@ const republish = options => {
         const domain = getDomain(options.server)
 
         if (
-          (blockVersion === 'prod' && domain === 'com') ||
+          (blockVersion === 'prod' &&
+            (domain === 'com' || domain === 'local')) ||
           (blockVersion === 'dev' &&
             (domain === 'co' ||
               domain === 'io' ||
