@@ -113,7 +113,6 @@ go(branches, (branch, index) => {
   const replaceOptions = replaceConfig
   const republishOptions = {
     server: program.republish,
-    commit: '',
     skipUpdate: true
   }
 
