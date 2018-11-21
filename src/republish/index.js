@@ -38,13 +38,8 @@ const republish = options => {
         const domain = getDomain(options.server)
 
         if (
-          (blockVersion === 'prod' &&
-            (domain === 'com' || domain === 'local')) ||
-          (blockVersion === 'dev' &&
-            (domain === 'co' ||
-              domain === 'io' ||
-              domain === 'app' ||
-              domain === 'local'))
+          blockVersion === 'prod' ||
+          (blockVersion === 'dev' && domain !== 'com')
         ) {
           const host = getHost(options.server)
           const customFile = `${apiCall}${host.config}`
@@ -53,9 +48,7 @@ const republish = options => {
             ? republishFlow(options.skipUpdate, domain, apiCall)
             : error(`${customFile} not found`)
         } else {
-          error(
-            'Use /dev branch to republish on dev or stage server\nUse prod branch to republish on prod server'
-          )
+          error('Use prod branch to republish on prod server')
         }
       } else {
         error(`can't detect branch version`)
