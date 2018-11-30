@@ -37,8 +37,8 @@ module.exports = {
       blockApi.roles = block.roles
 
       block.api = blockApi
-    } else if (blockData.length === 2) {
-      block.version = 'dev'
+    } else if (blockData.length === 3) {
+      block.version = blockData[2]
       block.type = blockData[0] === 'theme' ? blockData[0] : 'undefined'
       block.isWireframe = false
       block.namespace = null
