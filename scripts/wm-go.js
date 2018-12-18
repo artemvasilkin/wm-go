@@ -23,8 +23,8 @@ const {
   customFunction,
   findConfig,
   replaceConfig
-} = require(`${process.cwd()}/.wmgorc.js`)
-// } = require('../config/.wmgorc.js')
+  // } = require(`${process.cwd()}/.wmgorc.js`)
+} = require('../config/.wmgorc.js')
 
 const [, , ...args] = process.argv
 const pattern = args.length ? args[0] : false
