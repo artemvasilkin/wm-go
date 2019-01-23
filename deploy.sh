@@ -4,6 +4,7 @@
 set -e
 
 # npm i
+npm i vuepress@next -g
 npm i
 
 # build
