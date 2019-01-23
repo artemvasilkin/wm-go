@@ -1,13 +1,13 @@
 FROM debian:9.5-slim
 
 LABEL "com.github.actions.name"="deploy"
-LABEL "com.github.actions.description"="Write arguments to the standard output"
-LABEL "com.github.actions.icon"="mic"
-LABEL "com.github.actions.color"="purple"
+LABEL "com.github.actions.description"="Deploy github pages"
+LABEL "com.github.actions.icon"="github"
+LABEL "com.github.actions.color"="yellow"
 
-LABEL "repository"="http://github.com/octocat/hello-world"
+LABEL "repository"="http://github.com/artemvasilkin/wm-go"
 LABEL "homepage"="http://github.com/actions"
-LABEL "maintainer"="Octocat <octocat@github.com>"
+LABEL "maintainer"="Artem Vasilkin <artemvasilkin@gmail.com>"
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
