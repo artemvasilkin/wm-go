@@ -1,0 +1,3 @@
+workflow "Deploy" {
+  on = "push"
+}
