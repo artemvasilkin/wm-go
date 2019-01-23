@@ -1,5 +1,5 @@
-FROM debian:9.5-slim
-FROM node
+# FROM debian:9.5-slim
+FROM node:latest
 
 LABEL "com.github.actions.name"="deploy"
 LABEL "com.github.actions.description"="Deploy github pages"
