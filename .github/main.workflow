@@ -1,4 +1,4 @@
-workflow "New workflow" {
+workflow "GitHub Pages Workflow" {
   on = "push"
   resolves = ["deploy"]
 }
