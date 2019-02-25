@@ -24,8 +24,7 @@ module.exports = {
         domain = 'app'
         break
       default:
-        domain = ''
-        out.error('server in undefined')
+        domain = input
     }
 
     return domain

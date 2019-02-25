@@ -39,7 +39,8 @@ const republish = options => {
 
         if (
           blockVersion === 'prod' ||
-          (blockVersion === 'dev' && domain !== 'com')
+          (blockVersion === 'dev' && domain !== 'com') ||
+          (blockVersion === 'test' && domain !== 'com')
         ) {
           const host = getHost(options.server)
           const customFile = `${apiCall}${host.config}`

@@ -27,6 +27,7 @@ module.exports = {
         break
       case 'com':
       case 'prod':
+      case 'structures':
         host = {
           protocol: 'https',
           name: 'api.weblium.com',

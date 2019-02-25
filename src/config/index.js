@@ -58,6 +58,15 @@ const makeConfig = () => {
     'wmUserPassword is undefined',
     { echo: '*' }
   )
+  configs.wmUserEmail.local = prompt(
+    'Enter wm-cli email for local server: ',
+    'wmUserEmail is undefined'
+  )
+  configs.wmUserPassword.local = prompt(
+    'Enter wm-cli password for local server: ',
+    'wmUserPassword is undefined',
+    { echo: '*' }
+  )
 
   if (
     configs.gitHubToken &&
@@ -78,10 +87,20 @@ const makeConfig = () => {
     configs.wmUserEmail.app.match(
       /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
     ) &&
+    configs.wmUserEmail.local &&
+    configs.wmUserEmail.local.match(
+      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
+    ) &&
+    configs.wmUserEmail.structures &&
+    configs.wmUserEmail.structures.match(
+      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
+    ) &&
     configs.wmUserPassword.io &&
     configs.wmUserPassword.co &&
     configs.wmUserPassword.com &&
-    configs.wmUserPassword.app
+    configs.wmUserPassword.app &&
+    configs.wmUserPassword.local &&
+    configs.wmUserPassword.structures
   ) {
     fs.writeFileSync(`${configFile}`, JSON.stringify(configs))
 
@@ -96,6 +115,10 @@ const makeConfig = () => {
     out(configs.wmUserPassword.com)
     out(configs.wmUserEmail.app)
     out(configs.wmUserPassword.app)
+    out(configs.wmUserEmail.local)
+    out(configs.wmUserPassword.local)
+    out(configs.wmUserEmail.structures)
+    out(configs.wmUserPassword.structures)
   } else {
     if (isNull(configs.gitHubToken)) {
       error('git-hub token is empty')
@@ -118,6 +141,14 @@ const makeConfig = () => {
     }
 
     if (isNull(configs.wmUserEmail.app)) {
+      error('wm-cli email for app server is empty')
+    }
+
+    if (isNull(configs.wmUserEmail.local)) {
+      error('wm-cli email for app server is empty')
+    }
+
+    if (isNull(configs.wmUserEmail.structures)) {
       error('wm-cli email for app server is empty')
     }
 
@@ -157,6 +188,24 @@ const makeConfig = () => {
       error('wm-cli email for app server is not a valid email')
     }
 
+    if (
+      !isNull(configs.wmUserEmail.local) &&
+      !configs.wmUserEmail.local.match(
+        /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
+      )
+    ) {
+      error('wm-cli email for local server is not a valid email')
+    }
+
+    if (
+      !isNull(configs.wmUserEmail.structures) &&
+      !configs.wmUserEmail.structures.match(
+        /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
+      )
+    ) {
+      error('wm-cli email for structures server is not a valid email')
+    }
+
     if (isNull(configs.wmUserPassword.io)) {
       error('wm-cli password for prod dev is empty')
     }
@@ -171,6 +220,14 @@ const makeConfig = () => {
 
     if (isNull(configs.wmUserPassword.app)) {
       error('wm-cli password for app server is empty')
+    }
+
+    if (isNull(configs.wmUserPassword.local)) {
+      error('wm-cli password for local server is empty')
+    }
+
+    if (isNull(configs.wmUserPassword.structures)) {
+      error('wm-cli password for structures server is empty')
     }
   }
 }
@@ -232,6 +289,10 @@ const showConfigs = () => {
       out(configs.wmUserPassword.com)
       out(configs.wmUserEmail.app)
       out(configs.wmUserPassword.app)
+      out(configs.wmUserEmail.local)
+      out(configs.wmUserPassword.local)
+      out(configs.wmUserEmail.structures)
+      out(configs.wmUserPassword.structures)
     }
   } catch (message) {
     error(message)
