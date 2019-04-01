@@ -1,29 +1,56 @@
 const appRoot = require('app-root-path')
 
-const devServer = 'dev'
-const stageServer = 'stage'
-const prodServer = 'prod'
-const appServer = 'app'
-
-const servers = [`${devServer}`, `${stageServer}`, `${prodServer}`]
-
-const devDomain = 'io'
-const stageDomain = 'co'
-const prodDomain = 'com'
-const appDomain = 'app'
-
-const domains = [
-  `${devDomain}`,
-  `${stageDomain}`,
-  `${prodDomain}`,
-  `${appDomain}`
-]
-
-const baseFile = `block.https.api.weblium.`
-const devFile = `${baseFile}${devDomain}`
-const stageFile = `${baseFile}${stageDomain}`
-const prodFile = `${baseFile}${prodDomain}`
-const appFile = `${baseFile}${appDomain}`
+const servers = {
+  dev: {
+    alias: 'dev',
+    domain: 'io',
+    protocol: 'https',
+    name: 'api.weblium.io',
+    config: '.https.api.weblium.io'
+  },
+  stage: {
+    alias: 'stage',
+    domain: 'co',
+    protocol: 'https',
+    name: 'api.weblium.co',
+    config: '.https.api.weblium.co'
+  },
+  prod: {
+    alias: 'prod',
+    domain: 'com',
+    protocol: 'https',
+    name: 'api.weblium.com',
+    config: '.https.api.weblium.com'
+  },
+  local: {
+    alias: 'local',
+    domain: 'local',
+    protocol: 'http',
+    name: '192.168.45.90:3000',
+    config: '.http.192.168.45.90.3000'
+  },
+  app: {
+    alias: 'app',
+    domain: 'app',
+    protocol: 'https',
+    name: 'api.weblium.app',
+    config: '.https.api.weblium.app'
+  },
+  lol: {
+    alias: 'lol',
+    domain: 'app',
+    protocol: 'https',
+    name: 'api.weblium.app',
+    config: '.https.api.weblium.app'
+  },
+  structures: {
+    alias: 'structures',
+    domain: 'com',
+    protocol: 'https',
+    name: 'api.weblium.com',
+    config: '.https.api.weblium.com'
+  }
+}
 
 const categories = [
   'about',
@@ -72,14 +99,6 @@ const wmConfig = `${appRoot.path}/config/wm-config.json`.replace(
 
 module.exports = {
   servers: servers,
-  devServer: devServer,
-  stageServer: stageServer,
-  prodServer: prodServer,
-  domains: domains,
-  baseFile: baseFile,
-  devFile: devFile,
-  stageFile: stageFile,
-  prodFile: prodFile,
   categories: categories,
   history: history,
   localhost: localhost,

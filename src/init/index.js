@@ -35,9 +35,7 @@ const initFlow = (server, domain) => {
         pr()
         updateHistory(domain, block, new Date())
       } else {
-        error(
-          'Use /dev branch to init on dev or stage server\nUse prod branch to init on prod server'
-        )
+        error('Use prod branch to init on prod server')
       }
     } else {
       error(`can't detect branch version`)

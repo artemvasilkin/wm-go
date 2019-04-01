@@ -1,32 +1,9 @@
-const out = require('../utils/out')
+const { servers } = require('../../config/globals')
+
+const getDomain = input => {
+  return servers[input] ? servers[input].domain || '' : undefined
+}
 
 module.exports = {
-  getDomain: input => {
-    let domain = ''
-
-    switch (input) {
-      case 'io':
-      case 'dev':
-        domain = 'io'
-        break
-      case 'co':
-      case 'stage':
-        domain = 'co'
-        break
-      case 'com':
-      case 'prod':
-        domain = 'com'
-        break
-      case 'local':
-        domain = 'local'
-        break
-      case 'app':
-        domain = 'app'
-        break
-      default:
-        domain = input
-    }
-
-    return domain
-  }
+  getDomain: input => getDomain(input)
 }
