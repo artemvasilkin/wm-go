@@ -17,29 +17,29 @@ const initFlow = (server, domain) => {
     const block = getBlock()
 
     if (block.version.length > 0) {
-      if (
-        (block.version === 'prod' && domain === 'com') ||
-        (block.version === 'dev' && domain !== 'com') ||
-        (block.version === 'test' && domain !== 'com')
-      ) {
-        npmInstall()
-        login(`${domain}`)
+      // if (
+      //   (block.version === 'prod' && domain === 'com') ||
+      //   (block.version === 'dev' && domain !== 'com') ||
+      //   (block.version === 'test' && domain !== 'com')
+      // ) {
+      npmInstall()
+      login(`${domain}`)
 
-        show(
-          `wm-cli ${block.api.call} init ${block.api.name} ${
-            block.api.category
-          } ${block.api.wireframe} ${block.api.roles}`
-        )
-        show(`wm-cli ${block.api.call} publish`)
-        save(`init on ${server}`)
-        pr()
-        updateHistory(domain, block, new Date())
-      } else {
-        error('Use prod branch to init on prod server')
-      }
+      show(
+        `wm-cli ${block.api.call} init ${block.api.name} ${
+          block.api.category
+        } ${block.api.wireframe} ${block.api.roles}`
+      )
+      show(`wm-cli ${block.api.call} publish`)
+      save(`init on ${server}`)
+      pr()
+      updateHistory(domain, block, new Date())
     } else {
-      error(`can't detect branch version`)
+      error('Use prod branch to init on prod server')
     }
+    // } else {
+    //   error(`can't detect branch version`)
+    // }
   } catch (message) {
     error(message)
 
