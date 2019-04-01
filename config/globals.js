@@ -36,13 +36,6 @@ const servers = {
     name: 'api.weblium.app',
     config: '.https.api.weblium.app'
   },
-  lol: {
-    alias: 'lol',
-    domain: 'app',
-    protocol: 'https',
-    name: 'api.weblium.app',
-    config: '.https.api.weblium.app'
-  },
   structures: {
     alias: 'structures',
     domain: 'com',

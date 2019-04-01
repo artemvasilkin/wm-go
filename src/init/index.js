@@ -23,7 +23,7 @@ const initFlow = (server, domain) => {
       //   (block.version === 'test' && domain !== 'com')
       // ) {
       npmInstall()
-      login(`${domain}`)
+      login(`${server}`)
 
       show(
         `wm-cli ${block.api.call} init ${block.api.name} ${

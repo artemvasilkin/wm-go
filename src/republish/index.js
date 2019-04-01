@@ -11,11 +11,11 @@ const { show } = require('../utils/show')
 const { save } = require('../save')
 const { pr } = require('../pr')
 
-const republishFlow = (skipUpdate, domain, apiCall) => {
+const republishFlow = (skipUpdate, domain, apiCall, server) => {
   try {
     update(skipUpdate)
     npmInstall()
-    login(domain)
+    login(server)
     show(`wm-cli ${apiCall} commit`)
     show(`wm-cli ${apiCall} publish`)
     save('update version')
@@ -46,7 +46,7 @@ const republish = options => {
           const customFile = `${apiCall}${host.config}`
 
           fs.existsSync(customFile)
-            ? republishFlow(options.skipUpdate, domain, apiCall)
+            ? republishFlow(options.skipUpdate, domain, apiCall, options.server)
             : error(`${customFile} not found`)
         } else {
           error('Use prod branch to republish on prod server')

@@ -11,7 +11,7 @@ const { login } = require('../login')
 const { pr } = require('../pr')
 
 const killFlow = (domain, server, apiCall) => {
-  login(`${domain}`)
+  login(`${server}`)
 
   show(`wm-cli ${apiCall} purge`)
 
