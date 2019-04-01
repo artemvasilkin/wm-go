@@ -13,12 +13,6 @@ const login = server => {
         configs.wmUserPassword[`${server}`]
       } -h ${host.protocol}://${host.name}`
     )
-
-    console.log(
-      `wm-cli login -u ${configs.wmUserEmail[`${server}`]} -p ${
-        configs.wmUserPassword[`${server}`]
-      } -h ${host.protocol}://${host.name}`
-    )
   } else {
     error('please, specify the server')
   }
